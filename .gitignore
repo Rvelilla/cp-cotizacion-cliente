@@ -11,3 +11,4 @@ venv/
 
 # Archivos temporales de procesamiento
 temp_*
+*.pdf
