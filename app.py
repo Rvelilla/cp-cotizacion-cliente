@@ -6,7 +6,7 @@ from procesador_pdf import procesar_cotizacion
 st.set_page_config(page_title="Generador de Cotizaciones - Carrocerías Panamericana", layout="centered")
 
 st.image("assets/cp-logo.png", width=50)
-st.title("Automatización de Cotizaciones")
+st.title("Generador de Cotizaciones")
 st.write("Sube la Cotización en PDF.")
 
 asesores = {
@@ -32,12 +32,13 @@ if uploaded_file is not None:
                 
                 try:
                     word_path = procesar_cotizacion(temp_pdf_path, nombre_asesor, cargo_asesor)
+                    nombre_archivo_salida = os.path.basename(word_path)
 
                     with open(word_path, "rb") as f:
                         st.download_button(
                             label="📥 Descargar Cotización en Word",
                             data=f,
-                            file_name="Cotizacion_Generada.docx",
+                            file_name=nombre_archivo_salida,
                             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                         )
                     st.success("¡Cotización generada exitosamente!")
@@ -46,3 +47,5 @@ if uploaded_file is not None:
                 finally:
                     if os.path.exists(temp_pdf_path):
                         os.remove(temp_pdf_path)
+                    if 'word_path' in locals() and os.path.exists(word_path):
+                        os.remove(word_path)

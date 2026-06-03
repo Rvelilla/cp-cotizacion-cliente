@@ -239,8 +239,11 @@ class CotizacionExtractor:
             self.datos[f"imagen_{i}"] = InlineImage(doc_tpl, img_path, width=Mm(50)) if os.path.exists(img_path) else ""
 
         doc_tpl.render(self.datos)
-        nombre_limpio = re.sub(r'[^\w\s-]', '', self.datos["nombre_cliente"]).strip().replace(' ', '_')
-        output_path = f"Cotizacion_{nombre_limpio}.docx"
+        
+        # Generar nombre basado en tipo de carrocería y cliente
+        tipo = re.sub(r'[^\w\s-]', '', self.datos.get("tipo_carroceria", "CARROCERIA")).strip().replace(' ', '_')
+        cliente = re.sub(r'[^\w\s-]', '', self.datos.get("nombre_cliente", "CLIENTE")).strip().replace(' ', '_')
+        output_path = f"Cotizacion_{tipo}_{cliente}.docx"
         doc_tpl.save(output_path)
 
         doc_final = docx.Document(output_path)
