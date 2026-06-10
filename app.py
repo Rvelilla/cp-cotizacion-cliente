@@ -1,12 +1,28 @@
 import streamlit as st
 import os
 import tempfile
+import base64
 from procesador_pdf import procesar_cotizacion
 
 st.set_page_config(page_title="Generador de Cotizaciones - Carrocerías Panamericana", layout="centered")
 
-st.image("assets/cp-logo.png", width=50)
-st.title("Generador de Cotizaciones")
+# Renderizado de Logo y Título alineados horizontalmente
+try:
+    with open("assets/cp-logo.png", "rb") as f:
+        logo_b64 = base64.b64encode(f.read()).decode()
+    st.markdown(
+        f"""
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+            <img src="data:image/png;base64,{logo_b64}" width="60">
+            <h1 style="margin: 0; font-size: 2.2rem; color: #31333F;">Generador de Cotizaciones</h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+except Exception:
+    # Fallback en caso de error con el archivo de imagen
+    st.title("Generador de Cotizaciones")
+
 st.write("Sube la Cotización en PDF.")
 
 asesores = {
