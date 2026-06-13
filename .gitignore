@@ -1,14 +1,22 @@
+# Entorno virtual y caché de Python
 __pycache__/
 *.py[cod]
+*$py.class
 .venv/
 venv/
+env/
 .env
-.streamlit/
 
-# Documentos generados
+# Metadatos de Dropbox
+.dropbox
+.dropbox.cache
+desktop.ini
+
+# Archivos temporales y documentos generados
+~$*.docx
 *.docx
 !plantillas/plantilla_cotizacion.docx
-
-# Archivos temporales de procesamiento
-temp_*
 *.pdf
+
+# Logs
+*.log
