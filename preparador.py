@@ -6,7 +6,7 @@ def preparar_plantilla():
     
     archivo_origen = None
     for archivo in os.listdir('.'):
-        if archivo.endswith('.docx') and ('Cliente' in archivo or 'Furgon' in archivo or 'base' in archivo):
+        if archivo.endswith('.docx') and not archivo.startswith('~$') and ('Cliente' in archivo or 'Furgon' in archivo or 'base' in archivo):
             archivo_origen = archivo
             break
             
