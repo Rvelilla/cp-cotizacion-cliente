@@ -15,7 +15,7 @@ desktop.ini
 # Archivos temporales y documentos generados
 ~$*.docx
 *.docx
-!plantillas/plantilla_cotizacion.docx
+!plantillas/*.docx
 *.pdf
 
 # Logs
